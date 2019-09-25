@@ -1,248 +1,202 @@
 <template>
-  <div id="bankcard">
-    <mt-header fixed title="银行卡">
-      <a slot="left">
-        <mt-button icon="back" @click="back">返回</mt-button>
-      </a>
-    </mt-header>
-    <div class="con-wrapper">
-      <div class="rech_con">
-        <h5 class="y_auton" v-if="useMsg.bank_user !== ''">您已绑定银行卡！</h5>
-        <h5 class="w_auton" v-if="useMsg.bank_user == ''">请填写您的银行卡信息进行绑定！</h5>
-        <div class="rech_list">
-          <span>姓名：</span>
-          <input
-            v-if="useMsg.bank_user !== ''"
-            type="text"
-            v-model="useMsg.bank_user"
-            disabled="disabled"
-          />
-          <input
-            v-if="useMsg.bank_user == ''"
-            type="text"
-            v-model="bank_user"
-            placeholder="请输入您的开户姓名"
-          />
-        </div>
-        <div class="rech_list">
-          <span>卡号：</span>
-          <input
-            v-if="useMsg.bank_card !== ''"
-            type="text"
-            v-model="useMsg.bank_card"
-            disabled="disabled"
-          />
-          <input
-            v-if="useMsg.bank_card == ''"
-            type="text"
-            v-model="bank_card"
-            placeholder="请输入银行卡号"
-          />
-        </div>
-        <div class="rech_list">
-          <span>开户行：</span>
-          <input
-            v-if="useMsg.bank_name !== ''"
-            type="text"
-            v-model="useMsg.bank_name"
-            disabled="disabled"
-          />
-          <input
-            v-if="useMsg.bank_name == ''"
-            type="text"
-            v-model="bank_name"
-            placeholder="请输入开户行全称"
-          />
-        </div>
-        <div class="rech_list">
-          <span>地址：</span>
-          <input
-            v-if="useMsg.bank_adderss !== ''"
-            type="text"
-            v-model="useMsg.bank_adderss"
-            disabled="disabled"
-          />
-          <input
-            v-if="useMsg.bank_adderss == ''"
-            type="text"
-            v-model="bank_adderss"
-            placeholder="请输入开户行地址"
-          />
-        </div>
-        <mt-button v-if="useMsg.bank_adderss !== ''" type="default" @click="back">返回</mt-button>
-        <mt-button v-if="useMsg.bank_adderss == ''" type="default" @click="bindBank">确认</mt-button>
+  <div class="public">
+    <van-nav-bar title="银行卡" left-arrow @click-left="back" />
+    <div class="content">
+      <div class="login_info waiting">
+        <van-field label="姓名" v-model="yinlian_name" clearable placeholder="请输入姓名" />
+        <van-field label="银行卡号" v-model="yinlian_number" clearable placeholder="请输入银行卡号" />
+        <van-field label="开户行" v-model="yinlian_bank" clearable placeholder="请输入开户行" />
       </div>
+      <!--  <p>
+        <span>可用BST:3.56</span>
+      </p> -->
+      <van-button type="primary" size="large" @click="addBank">确认</van-button>
     </div>
   </div>
 </template>
 
 <script>
-import { Indicator, Toast } from "mint-ui";
-
-export default {
-  components: {
-    Indicator,
-    Toast
-  },
-  data() {
-    return {
-      bank_user: "", //开户姓名
-      bank_card: "", //银行卡号
-      bank_name: "", //开户行名称
-      bank_adderss: "", //开户行地址
-      useMsg: [] //个人信息
-    };
-  },
-  mounted: function() {
-    let that = this;
-    that.getUserMsg();
-  },
-  methods: {
-    back() {
-      this.$router.go(-1); //返回上一层
+  import {
+    XDialog
+  } from "vux";
+  export default {
+    data() {
+      return {
+        yinlian_name: this.$store.state.pay_type.yinlian_name, //银联账户名
+        yinlian_number: this.$store.state.pay_type.yinlian_number, //银联卡号
+        yinlian_bank:this.$store.state.pay_type.yinlian_bank, //银行卡开户行
+      }
     },
-    //获取实名认证信息
-    getUserMsg() {
-      let that = this;
-      that
-        .$http({
-          url: "Personal/userMsg",
-          method: "post",
-          data: {
-            token: localStorage.getItem("token")
-          }
-        })
-        .then(function(res) {
-          if (res.data.code == 0) {
-            //成功回调
-            that.useMsg = res.data.data;
-          } else {
-            //失败
-            Toast(res.data.msg);
-          }
-        })
-        .catch(function(error) {
-          Toast({
-            message: "网络连接失败",
-            position: "bottom",
-            duration: 5000
-          });
-        });
+    components: {
+      XDialog,
     },
-    //绑定银行卡
-    bindBank() {
+    mounted() {
       let that = this;
-      if (!that.bank_user || that.bank_user == null) {
-        Toast("请输入开户姓名");
-      } else if (!that.bank_card || that.bank_card == null) {
-        Toast("请输入银行卡号");
-      } else if (!that.bank_name || that.bank_name == null) {
-        Toast("请输入开户行名称");
-      } else if (!that.bank_adderss || that.bank_adderss == null) {
-        Toast("请输入开户行地址");
-      } else {
-        Indicator.open({
-          text: "提交中..."
-        });
-        that
-          .$http({
-            url: "Personal/bankActive",
-            method: "post",
+      // that.getFudaInfo()
+    },
+    methods: {
+      back() {
+        this.$router.back(-1);
+      },
+ //新增银行卡
+      addBank() {
+        let that = this;
+        let yinlian_name = that.yinlian_name;
+        let yinlian_number = that.yinlian_number;
+        let yinlian_bank = that.yinlian_bank;
+        if (!yinlian_name || yinlian_name == null) {
+          that.$toast("请输入姓名");
+        } else if (!yinlian_number || yinlian_number == null) {
+          that.$toast("请输入银行卡号");
+        } else if (!yinlian_bank || yinlian_bank == null) {
+          that.$toast("请输入开户行");
+        } else {
+         that.$toast.loading({
+           mask: true,
+           message: "提交中..."
+         });
+          that.$http({
+             url: "User/editUserPayType",
+             method: "post",
             data: {
-              token: localStorage.getItem("token"),
-              bank_user: that.bank_user,
-              bank_card: that.bank_card,
-              bank_name: that.bank_name,
-              bank_adderss: that.bank_adderss
+              token: window.localStorage.getItem("token"),
+              yinlian_name: yinlian_name,
+              yinlian_number: yinlian_number,
+              yinlian_bank: that.yinlian_bank,
             }
-          })
-          .then(function(res) {
-            if (res.data.code == 0) {
-              //成功回调
-              Toast(res.data.msg);
-              that.$router.go(-1);
-            } else {
-              //失败
-              Toast(res.data.msg);
-            }
-            Indicator.close();
-          })
-          .catch(function(error) {
-            Indicator.close();
-            Toast({
-              message: "网络连接失败",
-              position: "bottom",
-              duration: 5000
+            }).then(function(res) {
+              that.$toast.clear();
+              if (res.data.code == 1) {
+               that.$toast.success("添加成功");
+                that.back();
+              } else {
+                that.$toast.fail(res.data.msg);
+              }
+            })
+            .catch(function(err) {
             });
-          });
+        }
+      },
+    }
+  }
+</script>
+
+<style lang="less" scoped>
+  .public {
+    .van-nav-bar__right {
+      color: #fff !important;
+      font-size: 0.4rem !important;
+    }
+
+    .van-nav-bar .van-icon {
+      color: #fff !important;
+      font-size: 0.4rem !important;
+    }
+
+    .content {
+      padding: 0;
+
+      .login_info {
+        width: 100%;
+        background: rgba(98, 98, 98, 0.1);
+
+        /deep/ .van-cell {
+          width: 94% !important;
+          margin: 0 auto !important;
+          border-bottom: 1px solid #1F244F !important;
+          border-radius: 0 !important;
+          background: none !important;
+          padding: 0.26rem 0.1rem !important;
+        }
+
+        /deep/ .van-cell:nth-child(3) {
+          border: none !important;
+        }
+
+        .van-cell:not(:last-child)::after {
+          display: none !important;
+        }
+
+        /deep/ .van-field__label {
+          color: #fff !important;
+        }
+
+        input::-webkit-input-placeholder {
+          /* placeholder颜色  */
+          color: #A7A7A7 !important;
+          /* placeholder字体大小  */
+        }
+      }
+      .van-button--large {
+        margin-top: 2rem !important;
+      }
+
+      .van-button--primary {
+        width: 92%;
+        margin: 0 4%;
+      }
+
+      h5 {
+        text-align: center;
+        font-size: 0.26rem;
+        padding: 0.2rem 0;
+        color: #5B913F;
+      }
+    }
+
+    .ver_dialog {
+      position: relative;
+
+      span.iconfont {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 0.2rem;
+      }
+
+      h3 {
+        padding: 0.2rem 0;
+        font-size: 0.32rem;
+        color: #2B2B2B;
+      }
+
+      input {
+        width: 4rem;
+        height: 0.66rem;
+        border: 1px solid #BFBFBF;
+        border-radius: 0.08rem;
+        padding-left: 0.2rem;
+        color: #333 !important;
+        margin: 0.8rem 0;
+        font-size: 0.26rem;
+      }
+
+      input::-webkit-input-placeholder {
+        color: #BEBEBE !important;
+      }
+
+      .dia_btn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        span {
+          width: 50%;
+          height: 0.8rem;
+          line-height: 0.8rem;
+          display: inline-block;
+          font-size: 0.28rem;
+          color: rgba(255, 255, 255, 1);
+        }
+
+        span:nth-child(1) {
+          background: rgba(172, 172, 172, 1);
+        }
+
+        span:nth-child(2) {
+          background: #4163C7;
+        }
       }
     }
   }
-};
-</script>
-
-<style scoped="scoped">
-#bankcard {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.con-wrapper {
-  position: fixed;
-  width: 100%;
-  height: calc(100% - .8rem);
-  overflow-x: hidden;
-  overflow-y: scroll;
-  top: .8rem;
-}
-
-.rech_con {
-  width: 100%;
-  padding: 0 0.2rem;
-}
-.rech_con h5 {
-  text-align: center;
-  font-weight: normal;
-  font-size: 0.26rem;
-  padding-top: 0.2rem;
-}
-.rech_con h5.y_auton {
-  color: #259b24;
-}
-.rech_con h5.w_auton {
-  color: #ef6213;
-}
-
-.rech_con .rech_list {
-  display: flex;
-  align-items: center;
-  padding-top: 0.2rem;
-}
-
-.rech_con .rech_list span {
-  width: 22%;
-  color: #333;
-  font-size: 0.28rem;
-}
-.rech_con .rech_list input {
-  flex: 1;
-  height: 0.8rem;
-  border: 1px solid #c8c8c8;
-  border-radius: 0.1rem;
-  padding-left: 0.1rem;
-  background: #fff;
-}
-
-.rech_con .mint-button {
-  display: block;
-  margin: auto;
-  font-size: 0.3rem;
-  width: 6rem;
-  height: 0.8rem;
-  color: #fff;
-  margin-top: 0.3rem;
-  border-radius: 0.2rem;
-  background: #ef6213;
-}
 </style>

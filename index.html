@@ -4,15 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-  <link rel="shortcut icon" type="image/x-icon" href="./static/glsfavicon.ico" />
-  <title>谷联社</title>
+  <title>比特星空</title>
 </head>
 
 <body>
   <div id="app"></div>
   <!-- built files will be auto injected -->
 </body>
-
 <style type="text/css">
   * {
     margin: 0;
@@ -26,17 +24,23 @@
   body {
     width: 100%;
     height: 100%;
+    background: #13173D;
     overflow: hidden;
+
   }
 
   /* 去掉默认样式 */
   select {
-    /* appearance: none;
+   /* appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none; */
     border: none;
     background: rgba(0, 0, 0, 0);
+    outline:none;
   }
+  select:focus,select:active,select:hover{
+  outline:none;
+}
 
   input[type="number"] {
     -webkit-appearance: none !important;
@@ -48,6 +52,7 @@
 
   input[type="text"] {
     -webkit-appearance: none !important;
+
   }
 
   input[type="search"] {
@@ -59,220 +64,9 @@
   }
 
 
-  /* 头部标题栏 */
-  .mint-header {
-    height: 0.8rem;
-    background: #ef6213;
-    padding: 0 0.2rem;
-  }
 
-  .mint-header.is-fixed {
-    background: #ef6213;
-  }
 
-  .mint-header-title {
-    font-size: .32rem;
-    line-height: .8rem;
-  }
 
-  .vux-tab-wrap {
-    position: relative;
-  }
-
-  .van-tabs__line {
-    position: absolute;
-    bottom: 15px;
-    left: 0;
-    z-index: 1;
-    height: 3px;
-    background-color: #ef6213;
-    border-radius: 3px;
-  }
-
-  .is-left,
-  .is-right {
-    font-size: 0.28rem;
-  }
-
-  .mint-header .mint-button {
-    display: flex;
-    display: -webkit-flex;
-    align-items: center;
-    -webkit-align-items: center;
-    height: .8rem;
-  }
-
-  .mintui {
-    font-size: .28rem;
-  }
-
-  .mint-header-button>a>button:nth-child(1)>span {
-    border-top-left-radius: .08rem;
-    border-bottom-left-radius: .08rem;
-    font-size: 0.28rem;
-  }
-
-  .mint-header .mint-button>label {
-    font-size: 0.28rem;
-  }
-
-  /* 搜索框 */
-  .search input {
-    height: 0.6rem;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.5);
-    border: none;
-    border: 1px solid #ef6213;
-    border-radius: 0.3rem;
-    padding: 0 0.1rem;
-    color: #ef6213;
-    font-size: 0.28rem;
-    text-align: center;
-    overflow: hidden;
-  }
-
-  .search {
-    position: absolute;
-    top: 0.2rem;
-    left: 0.2rem;
-    right: 0.2rem;
-    margin: auto;
-    text-align: center;
-  }
-
-  .search input::-webkit-input-placeholder {
-    color: #999;
-    text-align: center;
-  }
-
-  .search input::-moz-placeholder {
-    /* Mozilla Firefox 19+ */
-    color: #999;
-    text-align: center;
-  }
-
-  .search input::-moz-placeholder {
-    /* Mozilla Firefox 4 to 18 */
-    color: #999;
-    text-align: center;
-  }
-
-  .search input::-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: #999;
-    text-align: center;
-  }
-
-  /* .swipe .search button i {
-  display: inline-block;
-  font-size: 0.32rem;
-  line-height: 0.6rem;
-} */
-  .search button:disabled {
-    background: transparent;
-    color: #ef6213;
-  }
-
-  .search button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: #fff;
-    text-align: center;
-    height: 0.6rem;
-    width: 0.6rem;
-    border-radius: 0 0.3rem 0.3rem 0;
-    border: none;
-    background: #ef6213;
-    -webkit-transition: all 0.2s;
-    transition: all 0.2s;
-  }
-
-  .search button i {
-    display: inline-block;
-    font-size: 0.32rem;
-    line-height: 0.6rem;
-  }
-
-  /* 轮播图 */
-  .mint-swipe {
-    width: 100%;
-    height: 4.4rem;
-  }
-
-  .mint-swipe img {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  .mint-tab-item-label {
-    font-size: 0.24rem;
-  }
-
-  /* 加减框 */
-  .weui-cell {
-    padding: 0;
-  }
-
-  .weui-cell:before {
-    content: " ";
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    height: 1px;
-    border: 0;
-    color: #D9D9D9;
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
-    -webkit-transform: scaleY(0.5);
-    transform: scaleY(0.5);
-    left: 15px;
-  }
-
-  .vux-number-round .vux-number-selector-sub,
-  .vux-number-round .vux-number-selector-plus {
-    padding: 0px;
-    border: 1px solid #3cc51f;
-    text-align: center;
-  }
-
-  .vux-number-selector {
-    width: 0.4rem !important;
-    height: 0.4rem !important;
-    line-height: 0.4rem !important;
-    border-radius: 50% !important;
-  }
-
-  .vux-number-selector svg {
-    padding-bottom: 1px !important;
-    margin-left: -1px !important;
-  }
-
-  .vux-number-input {
-    float: left;
-    width: 1rem !important;
-    height: 0.4rem;
-    font-size: 0.32rem;
-    color: #666;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border: 1px solid #ececec;
-    padding: 0.06rem 0;
-    text-align: center;
-    border-radius: 1px;
-  }
-
-  /* 视频 */
-  .video-js .vjs-big-play-button {
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    margin: auto !important;
-  }
 
 </style>
 

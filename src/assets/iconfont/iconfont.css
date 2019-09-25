@@ -1,13 +1,12 @@
 @font-face {
   font-family: 'iconfont';  /* project id 1218220 */
-  src: url('https://at.alicdn.com/t/font_1218220_dq0y2d2ateo.eot');
-  src: url('https://at.alicdn.com/t/font_1218220_dq0y2d2ateo.eot?#iefix') format('embedded-opentype'),
-  url('https://at.alicdn.com/t/font_1218220_dq0y2d2ateo.woff2') format('woff2'),
-  url('https://at.alicdn.com/t/font_1218220_dq0y2d2ateo.woff') format('woff'),
-  url('https://at.alicdn.com/t/font_1218220_dq0y2d2ateo.ttf') format('truetype'),
-  url('https://at.alicdn.com/t/font_1218220_dq0y2d2ateo.svg#iconfont') format('svg');
+  src: url('https://at.alicdn.com/t/font_1218220_vx85rrfjag8.eot');
+  src: url('https://at.alicdn.com/t/font_1218220_vx85rrfjag8.eot?#iefix') format('embedded-opentype'),
+  url('https://at.alicdn.com/t/font_1218220_vx85rrfjag8.woff2') format('woff2'),
+  url('https://at.alicdn.com/t/font_1218220_vx85rrfjag8.woff') format('woff'),
+  url('https://at.alicdn.com/t/font_1218220_vx85rrfjag8.ttf') format('truetype'),
+  url('https://at.alicdn.com/t/font_1218220_vx85rrfjag8.svg#iconfont') format('svg');
 }
-
 .iconfont {
 	font-family: "iconfont" !important;
 	font-size: 16px;
@@ -15,83 +14,57 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-
-.icon-tabshouye:before {
-	content: "\e633";
+.icon-tabbiyan1:before {
+	content: "\e676";
 }
-
-.icon-tabaixinkuaizhuang:before {
-	content: "\e66f";
+.icon-tabzhengyan:before {
+	content: "\e675";
 }
-
-.icon-tabshangcheng2:before {
-	content: "\e680";
+.icon-tabfanhui:before {
+	content: "\e6be";
 }
-
-.icon-tabhuinonghuimin:before {
-	content: "\e88e";
+.icon-tabgengduo1:before {
+	content: "\e61a";
 }
-
-.icon-tabwode:before {
-	content: "\e617";
+.icon-tabDown_arrow:before {
+	content: "\e600";
 }
-.icon-tabfenxiang:before {
-	content: "\e615";
+.icon-tabduihao:before {
+	content: "\e621";
 }
-.icon-tabguanbi:before {
-	content: "\e649";
-}
-.icon-tabshengji:before {
-	content: "\e62f";
-}
-.icon-tabtianjia:before {
-	content: "\e62d";
-}
-.icon-tabshanchu:before {
-	content: "\e610";
-}
-.icon-tabgengduo:before {
-	content: "\e733";
-}
-.icon-tabaddress:before {
-	content: "\e6d9";
+.icon-tabshouji2:before {
+	content: "\e693";
 }
 .icon-tabsuo:before {
 	content: "\e644";
 }
-.icon-tabxinxi:before {
-	content: "\e67f";
+.icon-tabguanbi:before {
+	content: "\e649";
 }
-.icon-tabshouji:before {
-	content: "\e678";
+.icon-tabmima:before {
+	content: "\e783";
 }
-.icon-tabqiaquan:before {
-	content: "\e63e";
+.icon-tabyanzhengma:before {
+	content: "\e603";
 }
-.icon-tabxiala:before {
-	content: "\e660";
+.icon-tabidinput:before {
+	content: "\e781";
 }
-.icon-tabxingxing:before {
-	content: "\e60b";
+.icon-tabtongzhi:before {
+	content: "\e606";
 }
-.icon-tabsearch:before {
-	content: "\e70a";
+.icon-tabicon:before {
+	content: "\e667";
 }
-.icon-tabzuanshi:before {
-	content: "\e60d";
+.icon-tabdizhi:before {
+	content: "\e635";
 }
-.icon-tabsecurityCode-b:before {
-	content: "\e60e";
+.icon-tabbianji:before {
+	content: "\e62e"; /* //编辑 */
 }
-.icon-tabyaoqingmatianchong:before {
-	content: "\e637";
+.icon-tabshanchu:before {
+	content: "\e610"; /* 删除 */
 }
-.icon-tabfuwuquyu:before {
-	content: "\e62a";
-}
-.icon-tabxiaoxitongzhitixinglingshenglingdang:before {
-	content: "\e794";
-}
-.icon-tabgouwuche2:before {
-	content: "\e64f";
+.icon-tabyigouxuan:before {
+	content: "\e62c"; /* 删除 */
 }
